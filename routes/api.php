@@ -26,7 +26,9 @@ $api->version('v1', function($api){
             return ['status' => 200, 'data' =>  $data];
         });
         $api->delete('/logout' , 'App\Http\Controllers\AuthController@logout');
+        $api->post('/materi' , 'App\Http\Controllers\MateriController@store');
     });
     $api->post('/login' , 'App\Http\Controllers\AuthController@login');
     $api->post('/register' , 'App\Http\Controllers\AuthController@register');
+    $api->get('/materi' , 'App\Http\Controllers\MateriController@index');
 });
