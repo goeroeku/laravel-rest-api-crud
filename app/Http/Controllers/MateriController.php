@@ -58,9 +58,13 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        $table = Materi::where("uuid", $uuid)->firstOrFail();
+        return response()->json([
+            'success' => 201,
+            'data'   => $table
+        ]);
     }
 
     /**
@@ -81,9 +85,18 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $uuid)
     {
-        //
+        dd($request->input("thumbnail"));
+        $table = Materi::where("uuid", $uuid)->firstOrFail();
+        $table->thumbnail = $request->input("thumbnail");
+        $table->title = $request->input("title");
+        $table->content = $request->input("content");
+        $table->save();
+        return response()->json([
+            'success' => 203,
+            'message'   => "Proses hapus data berhasil."
+        ]);
     }
 
     /**
@@ -92,8 +105,14 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        //
+        $table = Materi::where("uuid", $uuid)->firstOrFail();
+        $table->delete();
+
+        return response()->json([
+            'success' => 203,
+            'message'   => "Proses hapus data berhasil."
+        ]);
     }
 }

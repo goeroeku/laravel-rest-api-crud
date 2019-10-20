@@ -27,8 +27,11 @@ $api->version('v1', function($api){
         });
         $api->delete('/logout' , 'App\Http\Controllers\AuthController@logout');
         $api->post('/materi' , 'App\Http\Controllers\MateriController@store');
+        $api->delete('/materi/{uuid}' , 'App\Http\Controllers\MateriController@destroy');
+        $api->put('/materi/{uuid}' , 'App\Http\Controllers\MateriController@update');
     });
     $api->post('/login' , 'App\Http\Controllers\AuthController@login');
     $api->post('/register' , 'App\Http\Controllers\AuthController@register');
     $api->get('/materi' , 'App\Http\Controllers\MateriController@index');
+    $api->get('/materi/{uuid}' , 'App\Http\Controllers\MateriController@show');
 });
